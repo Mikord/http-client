@@ -1,54 +1,80 @@
 package net.elost.http_client;
 
+import java.util.List;
+import java.util.Map;
+
 public class HttpResponse {
-  private final HttpMethod httpMethod;
-  private final String url;
-  private final String requestBody;
+  private HttpMethod httpMethod;
+  private String url;
+  private String requestBody;
 
-  private final int code;
-  private final String responseBody;
-  private final byte[] responseBinaryBody;
+  private int code;
+  private String responseBody;
+  private byte[] responseBinaryBody;
 
-  public HttpResponse(HttpMethod httpMethod, String url, String requestBody, int code, String responseBody) {
-    this.httpMethod = httpMethod;
-    this.url = url;
-    this.requestBody = requestBody;
-    this.code = code;
-    this.responseBody = responseBody;
-    this.responseBinaryBody = null;
-  }
-
-  public HttpResponse(HttpMethod httpMethod, String url, String requestBody, int code, byte[] responseBinaryBody) {
-    this.httpMethod = httpMethod;
-    this.url = url;
-    this.requestBody = requestBody;
-    this.code = code;
-    this.responseBody = null;
-    this.responseBinaryBody = responseBinaryBody;
-  }
+  private Map<String, List<String>> responseHeaders;
 
   public HttpMethod getHttpMethod() {
     return httpMethod;
+  }
+
+  public HttpResponse httpMethod(HttpMethod httpMethod) {
+    this.httpMethod = httpMethod;
+    return this;
   }
 
   public String getUrl() {
     return url;
   }
 
+  public HttpResponse url(String url) {
+    this.url = url;
+    return this;
+  }
+
   public String getRequestBody() {
     return requestBody;
+  }
+
+  public HttpResponse requestBody(String requestBody) {
+    this.requestBody = requestBody;
+    return this;
   }
 
   public int getCode() {
     return code;
   }
 
+  public HttpResponse code(int code) {
+    this.code = code;
+    return this;
+  }
+
   public String getResponseBody() {
     return responseBody;
   }
 
+  public HttpResponse responseBody(String responseBody) {
+    this.responseBody = responseBody;
+    return this;
+  }
+
   public byte[] getResponseBinaryBody() {
     return responseBinaryBody;
+  }
+
+  public HttpResponse responseBinaryBody(byte[] responseBinaryBody) {
+    this.responseBinaryBody = responseBinaryBody;
+    return this;
+  }
+
+  public Map<String, List<String>> getResponseHeaders() {
+    return responseHeaders;
+  }
+
+  public HttpResponse responseHeaders(Map<String, List<String>> headers) {
+    this.responseHeaders = headers;
+    return this;
   }
 
   @Override

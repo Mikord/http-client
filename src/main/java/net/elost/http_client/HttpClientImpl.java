@@ -55,14 +55,24 @@ public class HttpClientImpl implements HttpClient {
     sendRequest(connection, input);
 
     int status = getResponseCode(connection);
+
+    HttpResponse response = new HttpResponse()
+        .httpMethod(method)
+        .url(connection.getURL().toString())
+        .requestBody(input)
+        .code(status)
+        .responseHeaders(connection.getHeaderFields());
+
     if (isOctetStream(connection)) {
       byte[] result = tryReadBinaryResult(connection);
-      return new HttpResponse(method, connection.getURL().toString(), input, status, result);
+      response.responseBinaryBody(result);
     }
     else {
       String result = tryReadResultString(connection);
-      return new HttpResponse(method, connection.getURL().toString(), input, status, result);
+      response.responseBody(result);
     }
+
+    return response;
   }
 
   private HttpURLConnection connect(HttpMethod method, String url, String contentType, Map<String, String> headers) {
@@ -157,7 +167,13 @@ public class HttpClientImpl implements HttpClient {
   }
 
   private void logSendRequestIOException(HttpURLConnection connection, IOException ioe, String inputJson) {
-    int responseCode = getResponseCode(connection);
+    int responseCode = -1;
+    try {
+      responseCode = getResponseCode(connection);
+    }
+    catch (Exception e) {
+    }
+
     String responseBody;
     if (isOctetStream(connection)) {
       responseBody = "Binary Content";
