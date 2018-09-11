@@ -6,7 +6,7 @@
 
   <groupId>net.elost</groupId>
   <artifactId>http-client</artifactId>
-  <version>0.5-SNAPSHOT</version>
+  <version>0.5</version>
   <packaging>bundle</packaging>
 
   <distributionManagement>
@@ -27,6 +27,19 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.tomakehurst</groupId>
+      <artifactId>wiremock-standalone</artifactId>
+      <version>2.18.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
